@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Kaku! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Parisienne&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="backgroundMusic" loop autoplay>
+        <source src="romantic_tune.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <!-- Slide 1: Greeting Card Heart --><div class="slide active" id="slide1">
+            <div class="heart-container" onclick="openHeart()">
+                <div class="heart"></div>
+                <div class="heart-text">
+                    <p>A Special Card for My Special Person,<br>My Kaku &nbsp;❤️</p>
+                </div>
+            </div>
+            <p class="tap-hint">Tap the heart to open!</p>
+        </div>
+
+        <!-- Slide 2: Our Best Memory (Photos) -->
+          
+        <div class="slide" id="slide2"> 
+            <h2 class="slide-title">Our Best Memory</h2> 
+            <div class="photo-grid"> <div class="photo-frame"> 
+                <img src="image2.jpeg"> <p class="photo-caption">Apna first meet up </p>
+             </div> <div class="photo-frame"> <img src="image.jpeg">
+                 <p class="photo-caption">jase AI hum close kr diye vase hamesha close rhe ge</p> </div> 
+                 <div class="photo-frame"> <video autoplay loop muted controls> <source src="MyMemory.mp4" type="video/mp4"> </video>
+                     <p class="photo-caption">another memory </p> </div> <div class="photo-frame"> <img src="image3.jpeg"Our Photo 3">
+                         <p class="photo-caption">best smile I ever seen </p>
+                         </div> <!-- Add more photo-frame divs as needed --></div>
+               <button class="next-button" onclick="nextSlide()">Next</button>
+                        
+        </div>
+        <!-- Slide 3: Our Journey Begin (First Meet Location) --><div class="slide" id="slide3">
+            <h2 class="slide-title">Our Journey Began...</h2>
+            
+                    Do you remember? It all started at.....<br>
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1xX9DvLXIbIBnKSLPZtxxLkjI71j0iZQ&ehbc=2E312F" width="640" height="480"></iframe>
+            <button class="next-button" onclick="nextSlide()">Next</button>
+            </div>
+
+        <!-- Slide 4: Love Letter (Old Style Quote) --><div class="slide" id="slide4">
+            <div class="old-letter-paper">
+                <p class="letter-greeting">My Dearest Kaku,</p>
+                <p class="letter-text">
+                    Love you meri jaan, mere Kaku. Meri life mein aane ke liye, mujhe itna pyaar karne ke liye. Sirf aaj ka din nahin, har din special hai mere liye. Zyada kuch toh nahin hai mere paas, par aap ke liye kabhi na khatam hone wala pyaar hai jo mein hamesha karta hoon, karta rahunga. Love you mere shone, and Happy Birthday meri jaan.
+                </p>
+                <p class="letter-signature">Forever Yours,</p>
+                <p class="letter-signature">[Apka koko]
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
