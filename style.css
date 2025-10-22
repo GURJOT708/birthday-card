@@ -1,0 +1,437 @@
+body {
+    margin: 0;
+    font-family: 'Dancing Script', cursive; /* Default romantic font */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to top, #ffecd2 0%, #fcb69f 100%); /* Soft, romantic background */
+    overflow: hidden; /* Hide scrollbars as we're using slides */
+    perspective: 1000px; /* For 3D transitions */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Adjust as needed */
+    height: 100vh; /* Full viewport height for slides */
+    overflow: hidden; /* Ensure slides stay within container */
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for content */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(100%); /* Start off-screen below */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    z-index: 0; /* Default z-index */
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 1; /* Bring active slide to front */
+}
+
+/* --- Slide 1: Heart Greeting --- */
+#slide1 {
+    background: radial-gradient(circle at center, #ffe0f0 0%, #ffadad 100%); /* Soft pink gradient */
+}
+
+.heart-container {
+    position: relative;
+    width: 250px; /* Size of the heart container */
+    height: 250px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.heart-container:hover {
+    transform: scale(1.05);
+}
+
+.heart {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #e53935; /* Deep red heart */
+    transform: rotate(-45deg);
+    box-shadow: 0 0 30px rgba(229, 57, 53, 0.6);
+    animation: heartbeat 1.2s infinite;
+    z-index: 2; /* Above the text initially */
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #e53935;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -75px;
+    left: 0;
+}
+
+.heart::after {
+    left: 75px;
+    top: 0;
+}
+
+.heart-text {
+    position: absolute;
+    font-family: 'Parisienne', cursive; /* More elegant font for greeting */
+    font-size: 2.2em; /* Larger, more romantic font size */
+    color: #fff; /* White text on heart */
+    text-align: center;
+    line-height: 1.3;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    z-index: 1; /* Below the heart initially */
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.heart-container.open .heart {
+    transform: scale(0) rotate(-45deg); /* Heart shrinks and disappears */
+    opacity: 0;
+    transition: transform 0.8s ease-in, opacity 0.8s ease-in;
+}
+
+.heart-container.open .heart-text {
+    opacity: 0;
+}
+
+.tap-hint {
+    margin-top: 30px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2em;
+    color: #666;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1) rotate(-45deg); }
+    15% { transform: scale(1.08) rotate(-45deg); }
+    30% { transform: scale(1) rotate(-45deg); }
+    45% { transform: scale(1.08) rotate(-45deg); }
+    60% { transform: scale(1) rotate(-45deg); }
+}
+
+/* --- General Slide Styling --- */
+.slide-title {
+    font-family: 'Parisienne', cursive;
+    font-size: 3.5em;
+    color: #884a51; /* A rich, romantic red-brown */
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.next-button {
+    margin-top: 40px;
+    padding: 15px 30px;
+    font-size: 1.3em;
+    font-family: 'Dancing Script', cursive;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.next-button:hover {
+    background-color: #c62828;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    
+}
+
+/* --- Slide 2: Photos --- */
+#slide2 {
+    background: radial-gradient(circle at center, #fdfbfb 0%, #ebedee 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    overflow-y: auto; /* allows scrolling if content is taller than viewport */
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.photo-frame {
+    background-color: #fff;
+    border: 8px solid #f0e68c;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.photo-frame:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+}
+
+.photo-frame img,
+.photo-frame video {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.photo-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Next Slide Button */
+.next-button {
+    position: sticky; /* sticky instead of absolute */
+    bottom: 20px;
+    margin-top: 20px;
+    align-self: center; /* center horizontally */
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color:#af0101;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+}
+
+.next-button:hover {
+    background-color: #af0101;
+}
+
+
+/* --- Slide 3: Location --- */
+#slide3 {
+    background: radial-gradient(circle at center, #e0f2f7 0%, #b3e5fc 100%); /* Soft blue gradient */
+}
+
+.location-content {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.location-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em;
+    line-height: 1.4;
+    color: #444;
+}
+
+.highlight-location {
+    font-family: 'Parisienne', cursive;
+    font-size: 1.3em;
+    color: #d32f2f; /* Highlight in a stronger red */
+    font-weight: bold;
+    display: block; /* New line for location */
+    margin-top: 10px;
+}
+
+.location-image {
+    max-width: 70%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+/* --- Slide 4: Old Letter --- */
+#slide4 {
+    background: radial-gradient(circle at center, #fdf8e3 0%, #f0e6d2 100%); /* Creamy, old paper background */
+    padding: 50px;
+}
+
+.old-letter-paper {
+    background-color: #fdfaf0;
+    border: 1px solid #d4c5a3;
+    border-radius: 5px;
+    padding: 40px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 700px;
+    line-height: 1.8;
+    color: #4a4a4a; /* Darker text for readability */
+    font-family: 'Cormorant Garamond', serif; /* Old-style serif font */
+    font-size: 1.3em;
+    text-align: justify;
+    position: relative;
+    z-index: 1; /* Above background */
+}
+
+.old-letter-paper::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px dashed #d4c5a3; /* Dashed border for an antique look */
+    border-radius: 8px;
+    z-index: 0;
+}
+
+.letter-greeting {
+    font-family: 'Parisienne', cursive;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    text-align: left;
+    color: #6a0505; /* A vintage red */
+}
+
+.letter-text {
+    margin-bottom: 30px;
+    text-indent: 30px; /* Indent first line of paragraphs */
+}
+
+.letter-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em;
+    text-align: right;
+    margin-top: 15px;
+    color: #6a0505;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .heart-container {
+        width: 200px;
+        height: 200px;
+    }
+    .heart, .heart::before, .heart::after {
+        width: 120px;
+        height: 120px;
+    }
+    .heart::before { top: -60px; }
+    .heart::after { left: 60px; }
+    .heart-text {
+        font-size: 1.8em;
+    }
+    .slide-title {
+        font-size: 2.8em;
+    }
+    .photo-grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+    .photo-frame img {
+        height: 150px;
+    }
+    .location-text {
+        font-size: 2em;
+    }
+    .old-letter-paper {
+        padding: 25px;
+        font-size: 1.1em;
+    }
+    .letter-greeting {
+        font-size: 1.5em;
+    }
+    .letter-signature {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .heart-container {
+        width: 180px;
+        height: 180px;
+    }
+    .heart, .heart::before, .heart::after {
+        width: 100px;
+        height: 100px;
+    }
+    .heart::before { top: -50px; }
+    .heart::after { left: 50px; }
+    .heart-text {
+        font-size: 1.5em;
+    }
+    .slide-title {
+        font-size: 2.2em;
+    }
+    .next-button {
+        padding: 10px 20px;
+        font-size: 1.1em;
+    }
+    .location-text {
+        font-size: 1.5em;
+    }
+    .location-image {
+        max-width: 90%;
+    }
+    .old-letter-paper {
+        padding: 20px;
+        font-size: 1em;
+    }
+    /* --- Slide 3: Location --- */
+#slide3 {
+    background: radial-gradient(circle at center, #e0f2f7 0%, #b3e5fc 100%); /* Soft blue gradient */
+}
+
+.location-content {
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
+
+.location-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8em;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 25px; /* Add some space above the map */
+}
+
+/* Styling for the new Google Map iframe */
+#slide3 iframe {
+    width: 100%; /* Make the map responsive */
+    max-width: 700px; /* Set a maximum width */
+    height: 400px; /* Adjust height as needed */
+    border: 0; /* Remove the default border */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustment for the map on smaller screens */
+@media (max-width: 768px) {
+    .location-text {
+        font-size: 2.2em;
+    }
+    #slide3 iframe {
+        height: 350px;
+    }
+}
+}
